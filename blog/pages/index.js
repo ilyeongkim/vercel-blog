@@ -1,5 +1,5 @@
 import Head from 'next/head'
-import Layout, { siteTitle } from '../components/Layout'
+import { siteTitle } from '../pages/_document'
 import utilStyles from '../styles/utils.module.css'
 import { useEffect, useState } from 'react'
 import Link from 'next/link'
@@ -27,7 +27,7 @@ export async function getStaticProps() {
 
 export default function Home({ allPostsData }) {
   return (
-    <Layout home>
+    <>
       <Head>
         <title>{siteTitle}</title>
       </Head>
@@ -52,6 +52,6 @@ export default function Home({ allPostsData }) {
           ))}
         </ul>
       </section>
-    </Layout>
+    </>
   )
 }

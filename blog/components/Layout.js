@@ -1,4 +1,3 @@
-import Head from 'next/head'
 import Image from 'next/image'
 import styles from './layout.module.css'
 import utilStyles from '../styles/utils.module.css'
@@ -6,7 +5,7 @@ import Link from 'next/link'
 import { useEffect, useState } from 'react'
 import Utterances from './Utterances'
 
-const name = 'Your Name'
+const name = 'CHOI JEEMIN'
 
 export default function Layout({ children, home }) {
   const [theme, setTheme] = useState(() =>
@@ -14,7 +13,7 @@ export default function Layout({ children, home }) {
       ? localStorage.getItem('theme') === 'dark'
         ? 'dark'
         : 'light'
-      : 'light',
+      : 'light'
   )
 
   useEffect(() => {
@@ -35,6 +34,7 @@ export default function Layout({ children, home }) {
       setTheme('dark')
     }
   }
+
   return (
     <div className="bg-pink-50 dark:bg-black text-gray-800 dark:text-gray-200 h-screen">
       <div className={styles.container}>
@@ -54,25 +54,27 @@ export default function Layout({ children, home }) {
                 className={utilStyles.borderCircle}
                 height={144}
                 width={144}
-                alt=""
+                alt={name}
               />
               <h1 className={utilStyles.heading2Xl}>{name}</h1>
             </>
           ) : (
             <>
               <Link href="/">
-                <Image
-                  priority
-                  src="/images/profile.jpg"
-                  className={utilStyles.borderCircle}
-                  height={108}
-                  width={108}
-                  alt=""
-                />
+                <a>
+                  <Image
+                    priority
+                    src="/images/profile.jpg"
+                    className={utilStyles.borderCircle}
+                    height={108}
+                    width={108}
+                    alt={name}
+                  />
+                </a>
               </Link>
               <h2 className={utilStyles.headingLg}>
-                <Link href="/" className={utilStyles.colorInherit}>
-                  {name}
+                <Link href="/">
+                  <a className={utilStyles.colorInherit}>{name}</a>
                 </Link>
               </h2>
             </>
@@ -83,7 +85,9 @@ export default function Layout({ children, home }) {
           <>
             <Utterances />
             <div className={styles.backToHome}>
-              <Link href="/">← Back to home</Link>
+              <Link href="/">
+                <a>← Back to home</a>
+              </Link>
             </div>
           </>
         )}

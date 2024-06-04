@@ -5,6 +5,7 @@ import { remark } from 'remark'
 import html from 'remark-html'
 import { serialize } from 'next-mdx-remote/serialize'
 
+// eslint-disable-next-line no-undef
 const postsDirectory = path.join(process.cwd(), 'posts')
 
 export function getSortedPostsData() {
@@ -28,11 +29,13 @@ export function getSortedPostsData() {
     }
   })
   // Sort posts by date
-  return allPostsData.sort((a, b) => {
-    if (a.date < b.date) {
+  return allPostsData.sort(({ date: a }, { date: b }) => {
+    if (a < b) {
       return 1
-    } else {
+    } else if (a > b) {
       return -1
+    } else {
+      return 0
     }
   })
 }
@@ -73,10 +76,10 @@ export async function getPostData(id) {
     // Use gray-matter to parse the post metadata section
     const matterResult = matter(fileContents)
 
-    const processedcontent = await remark()
+    const processedContent = await remark()
       .use(html)
       .process(matterResult.content)
-    const contentHtml = processedcontent.toString()
+    const contentHtml = processedContent.toString()
 
     // Combine the data with the id
     return {
@@ -103,11 +106,12 @@ export async function getPostData(id) {
 
 export async function createPost({ id, title, date, content }) {
   const fullPath = path.join(postsDirectory, `${id}.md`)
+
   const data = `---
 title: '${title}'
 date: '${date}'
 ---
-  
+
 ${content}`
 
   fs.writeFileSync(fullPath, data)

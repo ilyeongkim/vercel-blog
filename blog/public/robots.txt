@@ -3,7 +3,7 @@ User-agent: *
 Allow: /
 
 # Host
-Host: https://vercel-blog-beta-neon.vercel.app/
+Host: https://fastcampus-blug.vercel.app
 
 # Sitemaps
-Sitemap: https://vercel-blog-beta-neon.vercel.app/sitemap.xml
+Sitemap: https://fastcampus-blug.vercel.app/sitemap.xml
